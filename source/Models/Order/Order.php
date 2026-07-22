@@ -4,20 +4,20 @@ namespace source\Models\Order;
 
 use source\Models\Order\Customer;
 use source\Models\Order\Status;
-use source\Models\Product\Product;
+use source\Models\Order\OrderItem;
 
 class Order {
     private ?int $id;
     private ?Customer $customer;
     private ?Status $status;
-    private ?Product $product;
+    private ?array $items;
 
     // Construtor
-    public function __construct(?int $id = null, ?Customer $customer = null, ?Status $status = null, ?Product $product = null) {
+    public function __construct(?int $id = null, ?Customer $customer = null, ?Status $status = null) {
         $this->id = $id;
         $this->customer = $customer;
         $this->status = $status;
-        $this->product = $product;
+        $this->items = [];
     }
 
     // Getters
@@ -33,8 +33,9 @@ class Order {
         return $this->status;
     }
 
-    public function getProduct(): ?Product {
-        return $this->product;
+    public function getItems(): ?array
+    {
+        return $this->items;
     }
 
     // Setters
@@ -50,17 +51,33 @@ class Order {
         $this->status = $status;
     }
 
-    public function setProduct(?Product $product): void {
-        $this->product = $product;
+
+    public function addItem(OrderItem $item): void
+    {
+        $this->items[] = $item;
     }
 
-    public function show() : string {
+    public function show(): string
+    {
+        $items = "";
+
+        foreach ($this->items as $item) {
+            $items .= "
+                Produto: {$item->getProduct()->getName()} <br>
+                Quantidade: {$item->getQuantity()} <br>
+                -------------------------<br>
+            ";
+        }
+
         return "
-            ----Pedido---- <br>
+            <h2>Encomenda {$this->id}</h2>
+
             Cliente: {$this->customer->getName()} <br>
-            Produto: {$this->product->getName()} <br>
-            Status: {$this->status->getName()} <br>
-            -------------- <br>
+            Status: {$this->status->getStatus()} <br>
+
+            <h3>Itens</h3>
+
+            {$items}
         ";
     }
 }

@@ -4,15 +4,15 @@ namespace source\Models\Order;
 
 class Status {
     private ?int $id;
-    private ?string $statusName;
+    private ?string $status;
 
     public function __construct(
         ?int $id = null,
-        ?string $statusName = null
+        ?string $status = null
     )
     {
         $this->id = $id;
-        $this->statusName = $statusName;
+        $this->status = $status;
     }
 
     // Getters
@@ -21,9 +21,9 @@ class Status {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getStatus(): ?string
     {
-        return $this->statusName;
+        return $this->status;
     }
 
     // Setters
@@ -32,8 +32,8 @@ class Status {
         $this->id = $id;
     }
 
-    public function setName(?string $statusName): void
+    public function setName(?string $status): void
     {
-        $this->statusName = $statusName;
+        $this->status = $status;
     }
 }
