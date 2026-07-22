@@ -10,19 +10,22 @@ class Product
     private ?string $name;
     private ?Category $category;
     private ?float $price;
+    private ?int $stock;
 
     public function __construct
     (
         ?int $id = null,
         ?string $name = null,
         ?Category $category = null,
-        ?float $price = null
+        ?float $price = null,
+        ?int $stock = null
     )
     {
         $this->id = $id;
         $this->name = $name;
         $this->category = $category;
         $this->price = $price;
+        $this->stock = $stock;
     }
 
     //-----------------------------------
@@ -47,6 +50,11 @@ class Product
         return $this->price;
     }
 
+    public function getStock() : ?int
+    {
+        return $this->stock;
+    }
+
     //-----------------------------------
 
     public function setName(string $name) : void
@@ -63,6 +71,12 @@ class Product
     {
         $this->price = $price;
     }
+
+    public function setStock(?int $stock) : void
+    {
+        $this->stock = $stock;
+    }
+
 
     //-----------------------------------
 
