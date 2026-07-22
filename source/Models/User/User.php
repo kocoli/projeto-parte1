@@ -90,7 +90,6 @@ class User {
                 <p>Senha: {$this->password}</p>
                 <p>Foto: {$this->photo}</p>
             </div>
-            
         ";
     }
 }
